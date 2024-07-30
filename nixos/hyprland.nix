@@ -1,4 +1,4 @@
-{ inputs, pkgs, config, username, ... }: {
+{ inputs, pkgs, ... }: {
 
   services.xserver = {
     enable = true;

@@ -23,14 +23,12 @@
     sbctl
     flatpak
     gnome-software
-    blender-hip
   ];
 
   # services
   services = {
     xserver = {
       enable = true;
-      videoDrivers = [ "amdgpu" ];
       excludePackages = [pkgs.xterm];
     };
     printing.enable = true;
@@ -54,15 +52,6 @@
     ];
     allowedUDPPortRanges = allowedTCPPortRanges;
   };
-
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [
-      amdvlk
-    ];
-  };
-
-  boot.initrd.kernelModules = [ "amdgpu" ];
 
   # network
   networking = {

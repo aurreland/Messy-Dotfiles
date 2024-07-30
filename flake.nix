@@ -3,14 +3,19 @@
 
   outputs = { self, home-manager, nixpkgs, nixpkgs-stable, ... } @ inputs:
   let
+
     username = "aurel";
     hostname = "nixos";
+    host = "desktop";
+
     system = "x86_64-linux";
     lib = nixpkgs.lib;
+
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
     };
+    
     pkgs-stable = import nixpkgs-stable {
       inherit system;
       config.allowUnfree = true;
@@ -19,7 +24,7 @@
     nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
       specialArgs = {
         inherit inputs;
-        inherit username hostname pkgs-stable system;
+        inherit username hostname pkgs-stable system host;
       };
       modules = [
         ./nixos/nixos.nix
@@ -30,7 +35,7 @@
         inherit pkgs;
         extraSpecialArgs = {
           inherit inputs;
-          inherit username pkgs-stable system;
+          inherit username pkgs-stable system host;
         };
         modules = [
           ./home-manager/home.nix

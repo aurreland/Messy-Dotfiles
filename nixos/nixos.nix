@@ -1,12 +1,10 @@
-{ pkgs, username, ... }: {
+{ hosts, username, ... }: {
 
   imports = [
+    ( ../hosts + ("/" + host) + "/system")
     ./audio.nix
-    ./boot.nix
-    ./hardware-configuration.nix
     ./hyprland.nix
     ./kanata.nix
-    ./locale.nix
     ./system.nix
   ];
 
@@ -24,4 +22,5 @@
   };
 
   system.stateVersion = "23.05";
+
 }
