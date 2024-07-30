@@ -21,16 +21,17 @@
     lib = nixpkgs.lib;
 
     pkgs = import nixpkgs {
-      inherit system;
+      system = systemSettings.system;
       config.allowUnfree = true;
     };
 
     pkgs-stable = import nixpkgs-stable {
-      inherit system;
+      system = systemSettings.system;
       config.allowUnfree = true;
     };
   in {
-    nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.system = lib.nixosSystem {
+      system = systemSettings.system;
       specialArgs = {
         inherit inputs pkgs-stable;
         inherit userSettings systemSettings;
@@ -40,7 +41,7 @@
       ];
     };
 
-    homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
+    homeConfigurations.user = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       extraSpecialArgs = {
         inherit inputs pkgs-stable;
