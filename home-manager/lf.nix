@@ -1,9 +1,4 @@
-{
-  inputs,
-  pkgs,
-  lib,
-  ...
-}: {
+{ inputs, pkgs, lib, ... }: {
   xdg.desktopEntries = lib.mkIf pkgs.stdenv.isLinux {
     "lf" = {
       name = "lf";

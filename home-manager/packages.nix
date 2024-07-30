@@ -1,4 +1,4 @@
-{ pkgs, pkgs-stable, inputs, ...}: {
+{ pkgs, pkgs-stable, ...}: {
   
   imports = [
     ./scripts/blocks.nix

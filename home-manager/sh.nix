@@ -1,9 +1,4 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}: let
+{ pkgs, config, lib, ... }: let
   aliases = {
     "tree" = "eza --tree";
     "nv" = "nvim";
