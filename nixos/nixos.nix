@@ -1,6 +1,6 @@
 {
   host,
-  username,
+  userSettings,
   ...
 }: {
   imports = [
@@ -11,9 +11,9 @@
     ./system.nix
   ];
 
-  users.users.${username} = {
+  users.users.${userSettings.username} = {
     isNormalUser = true;
-    initialPassword = username;
+    initialPassword = userSettings.username;
     extraGroups = [
       "nixosvmtest"
       "networkmanager"

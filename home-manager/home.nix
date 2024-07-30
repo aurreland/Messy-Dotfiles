@@ -1,9 +1,10 @@
 {
   pkgs,
   host,
-  username,
+  userSettings,
   ...
 }: let
+  username = userSettings.username;
   homeDirectory = "/home/${username}";
 in {
   imports = [

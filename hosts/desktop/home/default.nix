@@ -1,9 +1,9 @@
 {
   config,
-  username,
+  userSettings,
   ...
 }: let
-  homeDirectory = "/home/${username}";
+  homeDirectory = "/home/${userSettings.username}";
 in {
   gtk.gtk3.bookmarks = [
     "file://${config.xdg.userDirs.documents} Documents"

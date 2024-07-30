@@ -1,8 +1,7 @@
 {
   pkgs,
-  hostname,
   inputs,
-  system,
+  systemSettings,
   ...
 }: {
   # nix
@@ -29,7 +28,7 @@
     sbctl
     flatpak
     gnome-software
-    inputs.alejandra.defaultPackage.${system}
+    inputs.alejandra.defaultPackage.${systemSettings.system}
   ];
 
   # services
@@ -62,7 +61,7 @@
 
   # network
   networking = {
-    hostName = hostname;
+    hostName = systemSettings.hostname;
     networkmanager.enable = true;
   };
 

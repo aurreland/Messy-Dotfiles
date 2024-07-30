@@ -44,7 +44,7 @@
       inherit pkgs;
       extraSpecialArgs = {
         inherit inputs pkgs-stable;
-        inherit userSettings;
+        inherit userSettings systemSettings;
       };
       modules = [
         ./home-manager/home.nix
