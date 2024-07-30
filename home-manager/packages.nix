@@ -5,7 +5,7 @@
 }: {
   imports = [
     ./scripts/blocks.nix
-    ./scripts/nixos-wrapper.nix
+    ./scripts/hera.nix
   ];
 
   xdg.desktopEntries."org.gnome.Settings" = {
