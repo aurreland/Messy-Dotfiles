@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./scripts/blocks.nix
+    ./scripts/nixos-wrapper.nix
   ];
 
   xdg.desktopEntries."org.gnome.Settings" = {
