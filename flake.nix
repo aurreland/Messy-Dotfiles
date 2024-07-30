@@ -49,9 +49,6 @@
 
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
 
-    matugen.url = "github:InioX/matugen?ref=v2.2.0";
-    mitsugen.url = "/home/aurel/mitsugen";
-
     ags.url = "github:Aylur/ags";
 
     nixvim = {

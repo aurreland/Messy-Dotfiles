@@ -11,24 +11,24 @@
       [scratchpads.term]
       command = "kitty --class kitty-dropterm"
       animation = "fromTop"
+
+      [scratchpads.secrets]
+      command = "secrets"
+      animation = "fromTop"
     '';
 
-  wayland.windowManager.hyprland.settings = {
-    bind = [
-      "Super Shift, T, exec, pypr toggle term"
-    ];
-
-    windowrulev2 = let
-      kitty-dropterm = "class:^(kitty-dropterm)$";
-    in [
+  wayland.windowManager.hyprland.settings.windowrulev2 = let
+    kitty-dropterm = "class:^(kitty-dropterm)$";
+    secrets = "class:^(org.gnome.World.Secrets)$";
+  in [
       "float,${kitty-dropterm}"
       "size 40% 40%,${kitty-dropterm}"
       "workspace special silent,${kitty-dropterm}"
       "center,${kitty-dropterm}"
 
-      "float,${kitty-dropterm}"
-      "size 40% 80%,${kitty-dropterm}"
-      "workspace special silent,${kitty-dropterm}"
-    ];
-  };
+      "float,${secrets}"
+      "size 40% 40%,${secrets}"
+      "workspace special silent,${secrets}"
+      "center,${secrets}"
+  ];
 }
