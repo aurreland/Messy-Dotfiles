@@ -1,0 +1,182 @@
+body.material {
+    --text: #{{ $onSurface }};
+    --custom-accent: #{{ $primary }};
+    --custom-accent-hover: #{{ $primaryContainer }}; 
+    --background: #{{ $surface }};
+    --secondary-background: #{{ $surfaceVariant }};
+
+    --button-background: #{{ secondaryContainer }};
+    --button-text: #{{ $onSecondaryContainer }};
+
+    --box-shadow-color: #{{ $background }};
+    --secondary-box-shadow-color: #{{ $shadow }};
+    --tertiary-box-shadow-color: #{{ $shadow }};
+
+    --box-shadow: 0 0 0 1px var(--box-shadow-color); 
+    --secondary-box-shadow: var(--box-shadow-color);
+
+    --border-radius: var(--space-xs);
+
+
+    --accent: var(--text);
+    /*The text in the navbar, of the selected element*/
+    --accent-overlay: #{{ $onPrimaryContainer }};
+    /*The text in the navbar, which isn't selected*/
+    --navbar-accent: var(--text);
+    
+    /*the color of the divider*/
+    --divider: var(--secondary-box-shadow-color);
+
+    --body-background: var(--background);
+    --background-darker: var(--background);
+    --current-background: var(--background);
+    --navbar-background: var(--secondary-background);
+    --navbar-active-background: var(--custom-accent);
+    --gradient-body-background: var(--background);
+    --input-background: var(--secondary-background);
+    --modal-background: var(--background);
+    --modal-border: var(--box-shadow-color);
+    --download-button: #{{ $tertiaryContainer }};
+    --download-button-overlay: #{{ $primary }};
+    --success: var(--custom-accent);
+    --success-hover: var(--custom-accent-hover);
+    --primary: var(--custom-accent);
+    --primary-hover: var(--custom-accent-hover);
+    --danger: #{{ $error }};
+    --text-title: #{{ $primary }};
+    --icons-background: var(--secondary-background);
+    --osk-background: var(--background);
+    --osk-button-background: var(--secondary-background);
+    --osk-button-border: #ffffffff;
+  }
+
+body.material .Field>input, 
+body.material select, 
+body.material .gameCard, 
+body.material .gameCard>span,
+body.material .SearchBar,
+body.material .progressHeader,
+body.material .dmItemList
+{
+  box-shadow: var(--box-shadow) !important;
+}
+
+body.material .store-icon {
+  background: none;
+}
+
+body.material .Sidebar {
+  box-shadow: 1px 0 0 0 var(--box-shadow-color);
+}
+
+body.material .divider {
+  height: 1px;
+  margin: var(--space-3xs) 0 !important;
+}
+
+body.material .dmItemList {
+  border: none;
+}
+
+body.material .downloadManagerListItem {
+  border-top: none !important;
+  box-shadow: 0 -1px 0 0 var(--tertiary-box-shadow-color);
+
+  margin: 0;
+  padding: var(--space-md) var(--space-sm-fixed);
+}
+
+body.material .numberOfgames {
+  background: none;
+}
+
+body.material .SearchBar,
+body.material .gameCard,
+body.material .Field>input, 
+body.material select, 
+body.material .progressHeader,
+body.material .dmItemList,
+body.material .svg-button
+{
+  border-radius: var(--border-radius);
+}
+
+body.material .toggle,
+body.material .gameConfigContainer .titleWrapper .settings-icon {
+  color: var(--button-text) !important;
+  background: var(--button-background) !important;
+}
+
+
+/*
+* The filters and simmilar stuff in the Library thingie
+*/
+
+
+
+body.material .Header__filters {
+  height: 100%;
+  min-height: 35px;
+}
+
+body.material .platformFilters {
+  margin: 0;
+}
+
+body.material .storeFilter {
+  margin: auto 24px;
+}
+
+body.material *:has(>.FormControl) {
+  height: 100%;
+}
+
+body.material .FormControl {
+  height: 100%;
+
+  background: var(--button-background);
+  color: var(--button-text);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
+}
+
+body.material .FormControl .FormControl__button:first-child {
+  border-radius: var(--border-radius) 0 0 var(--border-radius) !important;
+}
+
+body.material .FormControl .FormControl__button:last-child {
+  border-radius: 0 var(--border-radius) var(--border-radius) 0 !important;
+}
+
+body.material .FormControl__button:hover,
+body.material .FormControl__button.active  {
+  background: var(--secondary-background) !important;
+}
+
+body.material .ActionIcons .FormControl__button>svg{
+  margin: auto;
+}
+
+
+/*
+* All default Buttons,
+* and their hovering
+*/
+body.material *:not(.submenu)>.button,
+body.material .sideloadGameButton,
+body.material .titleWrapper .svg-button, 
+body.material .game-actions  {
+  background: var(--button-background);
+  color: var(--button-text);
+  box-shadow: var(--box-shadow);
+  
+  border-radius: var(--border-radius);
+}
+
+body.material *:not(.submenu).button:hover,
+body.material .sideloadGameButton:hover,
+body.material .titleWrapper .svg-button:hover, 
+body.material .titleWrapper .settings-icon:hover {
+  background: var(--secondary-background) !important;
+  color: var(--button-text);
+}

@@ -7,6 +7,11 @@
     inputs.ags.homeManagerModules.default
   ];
 
+  xdg.configFile."ags/" = {
+    source = ../ags;
+    recursive = true;
+  };
+
   # Requires 'boot.kernelModules = [ "i2c-dev" ];' in system config to work
 
   home.packages = with pkgs; [
