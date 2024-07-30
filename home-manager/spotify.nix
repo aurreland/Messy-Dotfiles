@@ -8,10 +8,9 @@ in {
   imports = [inputs.spicetify-nix.homeManagerModule];
 
   programs.spicetify = {
-    enable = true;
-    theme = spicePkgs.themes.catppuccin;
-    enabledCustomApps = with spicePkgs.apps; [
-      marketplace
-    ];
+    #enable = true;
+    #enabledCustomApps = with spicePkgs.apps; [
+    #  marketplace
+    #];
   };
 }
