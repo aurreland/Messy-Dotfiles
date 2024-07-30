@@ -24,7 +24,5 @@
       marketplace
       ncsVisualizer
     ];
-    #theme = spicePkgs.themes.sleek;
-    colorScheme = "marketplace";
   };
 }
