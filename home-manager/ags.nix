@@ -11,9 +11,6 @@
     pywal
     ddcutil
     python3
-    python3Packages.materialyoucolor
-    python3Packages.pywayland
-    python3Packages.pillow
     brightnessctl
     material-symbols
     morewaita-icon-theme
