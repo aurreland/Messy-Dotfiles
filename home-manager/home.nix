@@ -11,7 +11,6 @@ in {
     ./ags
     ./hyprland
     ./neovim
-    #./distrobox.nix
     ./gaming.nix
     ./kitty.nix
     ./lf.nix
