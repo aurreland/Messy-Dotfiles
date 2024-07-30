@@ -8,11 +8,16 @@
     nixpkgs-stable,
     ...
   } @ inputs: let
-    username = "aurel";
-    hostname = "nixos";
-    host = "desktop";
+    systemSettings = {
+      system = "x86_64-linux";
+      hostname = "nixos";
+      host = "desktop";
+    };
+    userSettings = {
+      username = "aurel";
+      dotfilesDir = "~/.dotfiles";
+    };
 
-    system = "x86_64-linux";
     lib = nixpkgs.lib;
 
     pkgs = import nixpkgs {
@@ -27,8 +32,8 @@
   in {
     nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
       specialArgs = {
-        inherit inputs;
-        inherit username hostname pkgs-stable system host;
+        inherit inputs pkgs-stable;
+        inherit userSettings systemSettings;
       };
       modules = [
         ./nixos/nixos.nix
@@ -38,8 +43,8 @@
     homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       extraSpecialArgs = {
-        inherit inputs;
-        inherit username pkgs-stable system host;
+        inherit inputs pkgs-stable;
+        inherit userSettings;
       };
       modules = [
         ./home-manager/home.nix
