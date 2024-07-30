@@ -8,9 +8,9 @@
 in {
   imports = [
     (../hosts + ("/" + host) + "/home")
+    ./ags
     ./hyprland
     ./neovim
-    ./ags.nix
     #./distrobox.nix
     ./gaming.nix
     ./kitty.nix
