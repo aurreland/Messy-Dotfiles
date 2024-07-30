@@ -1,4 +1,9 @@
-{ pkgs, config, lib, ... }: let
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: let
   aliases = {
     "tree" = "eza --tree";
     "nv" = "nvim";
@@ -22,10 +27,11 @@
     "del" = "gio trash";
   };
 in {
-  options.shellAliases = with lib; mkOption {
-    type = types.attrsOf types.str;
-    default = {};
-  };
+  options.shellAliases = with lib;
+    mkOption {
+      type = types.attrsOf types.str;
+      default = {};
+    };
 
   config.programs = {
     zsh = {

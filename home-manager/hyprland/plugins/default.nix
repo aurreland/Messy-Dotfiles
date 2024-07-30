@@ -1,7 +1,5 @@
-{ pkgs, ... }: {
-
+{pkgs, ...}: {
   imports = [
     ./pyprland.nix
   ];
-
 }

@@ -1,9 +1,9 @@
-{
-  imports = [ 
+{pkgs, ...}: {
+  imports = [
     ./boot.nix
     ./hardware-configuration.nix
     ./locale.nix
-  ]; 
+  ];
 
   hardware.graphics = {
     enable = true;
@@ -12,7 +12,7 @@
     ];
   };
 
-  boot.initrd.kernelModules = [ "amdgpu" ];
-  
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  boot.initrd.kernelModules = ["amdgpu"];
+
+  services.xserver.videoDrivers = ["amdgpu"];
 }

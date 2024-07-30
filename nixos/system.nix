@@ -1,5 +1,10 @@
-{ pkgs, hostname, ...}: {
-
+{
+  pkgs,
+  hostname,
+  inputs,
+  system,
+  ...
+}: {
   # nix
   documentation.nixos.enable = false; # .desktop
   nixpkgs.config.allowUnfree = true;
@@ -9,13 +14,14 @@
   };
 
   # ags
-  boot.kernelModules = [ "i2c-dev" ];
+  boot.kernelModules = ["i2c-dev"];
 
   # dconf
   programs.dconf.enable = true;
 
   # packages
-  environment.systemPackages = with pkgs; with gnome; [
+  environment.systemPackages = with pkgs;
+  with gnome; [
     home-manager
     neovim
     git
@@ -23,6 +29,7 @@
     sbctl
     flatpak
     gnome-software
+    inputs.alejandra.defaultPackage.${system}
   ];
 
   # services

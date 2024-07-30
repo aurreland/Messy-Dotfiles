@@ -1,5 +1,4 @@
-{ pkgs, ... }: {
-  
+{pkgs, ...}: {
   hardware.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
@@ -10,6 +9,5 @@
     wireplumber.enable = true;
   };
 
-  environment.systemPackages = [ pkgs.alsa-utils ];
-
+  environment.systemPackages = [pkgs.alsa-utils];
 }

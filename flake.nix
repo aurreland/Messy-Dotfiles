@@ -1,9 +1,13 @@
 {
   description = "Configurations of Aurel";
 
-  outputs = { self, home-manager, nixpkgs, nixpkgs-stable, ... } @ inputs:
-  let
-
+  outputs = {
+    self,
+    home-manager,
+    nixpkgs,
+    nixpkgs-stable,
+    ...
+  } @ inputs: let
     username = "aurel";
     hostname = "nixos";
     host = "desktop";
@@ -15,13 +19,11 @@
       inherit system;
       config.allowUnfree = true;
     };
-    
+
     pkgs-stable = import nixpkgs-stable {
       inherit system;
       config.allowUnfree = true;
     };
-
-    formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt;
   in {
     nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
       specialArgs = {
@@ -34,14 +36,14 @@
     };
 
     homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = {
-          inherit inputs;
-          inherit username pkgs-stable system host;
-        };
-        modules = [
-          ./home-manager/home.nix
-        ];
+      inherit pkgs;
+      extraSpecialArgs = {
+        inherit inputs;
+        inherit username pkgs-stable system host;
+      };
+      modules = [
+        ./home-manager/home.nix
+      ];
     };
   };
 
@@ -74,5 +76,10 @@
     };
 
     spicetify-nix.url = "github:the-argus/spicetify-nix";
+
+    alejandra = {
+      url = "github:kamadorueda/alejandra/3.0.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }

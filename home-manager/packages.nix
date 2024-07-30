@@ -1,5 +1,8 @@
-{ pkgs, pkgs-stable, ...}: {
-  
+{
+  pkgs,
+  pkgs-stable,
+  ...
+}: {
   imports = [
     ./scripts/blocks.nix
   ];
@@ -13,7 +16,8 @@
     terminal = false;
   };
 
-  home.packages = (with pkgs; [
+  home.packages =
+    (with pkgs; [
       mission-center # Processes Monitor
       spotify # Spotify
       google-chrome # Chrome
@@ -48,7 +52,8 @@
       fzf
       lazydocker
       jq
-    ]) ++ (with pkgs-stable; [
+    ])
+    ++ (with pkgs-stable; [
       gnome-secrets # Keepass Manager
       # gaphor # Simple modelling tool
     ]);

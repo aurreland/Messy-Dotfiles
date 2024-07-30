@@ -3,7 +3,7 @@
     enable = true;
     keyboards = {
       main = {
-        devices = [ "/dev/input/by-id/usb-Logitech_USB_Keyboard-event-kbd" ];
+        devices = ["/dev/input/by-id/usb-Logitech_USB_Keyboard-event-kbd"];
         extraDefCfg = "process-unmapped-keys yes";
         config = ''
           (defsrc

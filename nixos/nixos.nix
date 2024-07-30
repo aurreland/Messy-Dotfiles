@@ -1,7 +1,10 @@
-{ hosts, username, ... }: {
-
+{
+  host,
+  username,
+  ...
+}: {
   imports = [
-    ( ../hosts + ("/" + host) + "/system")
+    (../hosts + ("/" + host) + "/system")
     ./audio.nix
     ./hyprland.nix
     ./kanata.nix
@@ -22,5 +25,4 @@
   };
 
   system.stateVersion = "23.05";
-
 }

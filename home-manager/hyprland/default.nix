@@ -1,8 +1,11 @@
-{ inputs, pkgs, config, ... }:
-let
+{
+  inputs,
+  pkgs,
+  config,
+  ...
+}: let
   hyprland = inputs.hyprland.packages.${pkgs.system}.hyprland;
 in {
-
   imports = [
     ./plugins
     ./bind.nix
@@ -44,7 +47,7 @@ in {
         repeat_delay = 250;
         repeat_rate = 35;
 
-        special_fallthrough	= true;
+        special_fallthrough = true;
         follow_mouse = 1;
       };
 
@@ -54,7 +57,7 @@ in {
 
       general = {
         border_size = 1;
-        
+
         gaps_in = 4;
         gaps_out = 5;
         gaps_workspaces = 50;
@@ -111,12 +114,12 @@ in {
         animate_mouse_windowdragging = false;
         enable_swallow = false;
         swallow_regex = "(foot|kitty|allacritty|Alacritty)";
-        
+
         disable_hyprland_logo = true;
         force_default_wallpaper = 0;
         new_window_takes_over_fullscreen = 2;
         allow_session_lock_restore = true;
-        
+
         initial_workspace_tracking = false;
       };
 

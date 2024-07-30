@@ -1,5 +1,9 @@
-{ inputs, pkgs, lib, ... }: {
-
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     inputs.lanzaboote.nixosModules.lanzaboote
   ];
@@ -18,6 +22,5 @@
   };
 
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.supportedFilesystems = [ "ntfs" ];
-  
+  boot.supportedFilesystems = ["ntfs"];
 }

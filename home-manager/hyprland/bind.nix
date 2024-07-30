@@ -50,15 +50,14 @@
     ${pkgs.hyprland}/bin/hyprctl dispatch "$1" $(((($(${pkgs.hyprland}/bin/hyprctl activeworkspace -j | ${pkgs.jq}/bin/jq -r .id) - 1)  / 10) * 10 + $2))
   '';
 in {
+  home.packages = [workspace_action record_script];
 
-  home.packages = [ workspace_action record_script ];
-
-  xdg.configFile."hypr/binds.conf".text = let 
+  xdg.configFile."hypr/binds.conf".text = let
     workspaces = mod: cmd: key: arg: "bind = ${mod}, ${key}, exec, workspace_action ${cmd} ${arg} # [hidden]";
     ws = workspaces "Super" "workspace";
     mvws = workspaces "Super+Shift" "movetoworkspace";
     mvwssl = workspaces "Super+Alt" "movetoworkspacesilent";
-    arr = [ "ampersand" "eacute" "quotedbl"  "apostrophe" "parenleft" "minus" "egrave" "underscore" "ccedilla" "agrave" ];
+    arr = ["ampersand" "eacute" "quotedbl" "apostrophe" "parenleft" "minus" "egrave" "underscore" "ccedilla" "agrave"];
   in ''
     bindl = Alt ,XF86AudioMute, exec, ${wpctl} set-mute @DEFAULT_SOURCE@ toggle # [hidden]
     bindl = Super ,XF86AudioMute, exec, ${wpctl} set-mute @DEFAULT_SOURCE@ toggle # [hidden]
@@ -126,7 +125,7 @@ in {
     #!
     ##! Workspace navigation
     # Switching
-    #/# bind = Super, Hash,, # Focus workspace # (1, 2, 3, 4, ...)  
+    #/# bind = Super, Hash,, # Focus workspace # (1, 2, 3, 4, ...)
     ${builtins.concatStringsSep "\n" (map (i: ws (builtins.elemAt arr i) (toString (i + 1))) (builtins.genList (i: i) (builtins.length arr)))}
 
 
@@ -200,7 +199,6 @@ in {
     bindl  = , XF86AudioMute, exec, ags run-js 'indicator.popup(1);' # [hidden]
     bindl  = Super+Shift,M,   exec, ags run-js 'indicator.popup(1);' # [hidden]
 
-        
     # Testing
     # bind = SuperAlt, f12, exec, ${notify-send} "Hyprland version: $(${hyprctl} version | head -2 | tail -1 | cut -f2 -d ' ')" "owo" -a 'Hyprland keybind'
     # bind = Super+Alt, f12, exec, ${notify-send} "Millis since epoch" "$(date +%s%N | cut -b1-13)" -a 'Hyprland keybind'
@@ -236,8 +234,7 @@ in {
     # Cursed stuff
     ## Make window not amogus large
     bind = Super+Alt+Shift, exclam, resizeactive, exact 640 480 # [hidden]
-   '';
+  '';
 
-  wayland.windowManager.hyprland.settings.source = [ "${config.home.homeDirectory}/.config/hypr/binds.conf" ];
-
+  wayland.windowManager.hyprland.settings.source = ["${config.home.homeDirectory}/.config/hypr/binds.conf"];
 }
