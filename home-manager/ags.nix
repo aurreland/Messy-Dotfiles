@@ -8,7 +8,7 @@
   ];
 
   xdg.configFile."ags/" = {
-    source = ../ags;
+    source = ./ags;
     recursive = true;
   };
 
