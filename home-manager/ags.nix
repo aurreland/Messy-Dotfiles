@@ -4,7 +4,7 @@
     inputs.ags.homeManagerModules.default
   ];
 
-  # Requires 'boot.kernelModules = [ "i2c-dev" ];' in nixos to work
+  # Requires 'boot.kernelModules = [ "i2c-dev" ];' in system config to work
 
   home.packages = with pkgs; [
     ollama
