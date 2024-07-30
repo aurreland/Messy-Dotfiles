@@ -3,7 +3,7 @@
 in {
 
   imports = [
-    ( ../hosts ("/" + host) + "/home")
+    ( ../hosts + ("/" + host) + "/home")
     ./hyprland
     ./neovim
     ./ags.nix
