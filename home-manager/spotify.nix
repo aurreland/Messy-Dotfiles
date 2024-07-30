@@ -3,7 +3,5 @@
   inputs,
   ...
 }: {
-  #home.packages = [ inputs.spicetify-nix.packages.${system}.default ];
-
-  #imports = [ inputs.spicetify-nix.homeManagerModule ];
+  home.packages = [inputs.spicetify-nix.packages.${system}.default];
 }
