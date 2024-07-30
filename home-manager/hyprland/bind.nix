@@ -221,7 +221,7 @@ in {
     bind = , Super, exec, true # Open app launcher
     bind = Super, Q, exec, ${pkgs.kitty}/bin/kitty # Launch kitty (terminal)
     bind = Super, C, exec, ${pkgs.vscode}/bin/code --password-store=gnome --enable-features=UseOzonePlatform --ozone-platform=wayland # Launch VSCode (editor)
-    bind = Super, E, exec, ${pkgs.gnome.nautilus}/bin/nautilus -w # Launch Nautilus (file manager)
+    bind = Super, E, exec, ${pkgs.nautilus}/bin/nautilus -w # Launch Nautilus (file manager)
     bind = Super, W, exec, ${pkgs.google-chrome}/bin/google-chrome-stable # Launch Google Chrome (browser)
     bind = Super, I, exec, XDG_CURRENT_DESKTOP="gnome" ${pkgs.gnome.gnome-control-center}/bin/gnome-control-center # Launch GNOME Settings
     bind = Ctrl+Super, V, exec, ${pkgs.pavucontrol}/bin/pavucontrol # Launch pavucontrol (volume mixer)
