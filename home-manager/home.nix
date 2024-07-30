@@ -1,6 +1,6 @@
 {
   pkgs,
-  host,
+  systemSettings,
   userSettings,
   ...
 }: let
@@ -8,7 +8,7 @@
   homeDirectory = "/home/${username}";
 in {
   imports = [
-    (../hosts + ("/" + host) + "/home")
+    (../hosts + ("/" + systemSettings.host) + "/home")
     ./ags
     ./hyprland
     ./neovim
