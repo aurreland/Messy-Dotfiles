@@ -18,6 +18,8 @@
       (f "de.haeckerfelix.Fragments")
       (f "com.github.Aylur.ags")
       (f "xdg-desktop-portal-gtk")
+      (f "kdeconnect-indicator")
+      "size 40% 40%, ^(kdeconnect-indicator)$"
       "float, title:^(Choose wallpaper)(.*)$"
       "immediate,.*\.exe"
 
