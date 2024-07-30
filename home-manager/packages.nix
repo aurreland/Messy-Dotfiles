@@ -41,6 +41,7 @@
       rustc
 
       # cli
+      nixfmt
       bat
       eza
       fd
