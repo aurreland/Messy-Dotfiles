@@ -28,7 +28,7 @@
 
     extraPackages = with pkgs; [
       gtksourceview
-      gtksourceview4t
+      gtksourceview4
       ollama
       pywal
       webkitgtk
