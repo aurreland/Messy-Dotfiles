@@ -7,19 +7,12 @@
   # Requires 'boot.kernelModules = [ "i2c-dev" ];' in system config to work
 
   home.packages = with pkgs; [
-    ollama
-    pywal
     ddcutil
-    python3
     brightnessctl
     material-symbols
     morewaita-icon-theme
     gradience
-    libnotify
     sass
-    xdg-user-dirs
-    yad
-    bc
   ];
 
   programs.ags = {
@@ -29,8 +22,6 @@
     extraPackages = with pkgs; [
       gtksourceview
       gtksourceview4
-      ollama
-      pywal
       webkitgtk
       webp-pixbuf-loader
       ydotool
