@@ -19,7 +19,6 @@
   home.packages =
     (with pkgs; [
       mission-center # Processes Monitor
-      spotify # Spotify
       google-chrome # Chrome
       vscode # VS Code
       fragments # Torrents

@@ -2,15 +2,27 @@
   system,
   inputs,
   ...
-}: let
-  spicePkgs = inputs.spicetify-nix.packages.${system}.default;
-in {
-  imports = [inputs.spicetify-nix.homeManagerModule];
+}: {
+  imports = [inputs.spicetify-nix.homeManagerModules.default];
 
-  programs.spicetify = {
-    #enable = true;
-    #enabledCustomApps = with spicePkgs.apps; [
-    #  marketplace
-    #];
+  programs.spicetify = let
+    spicePkgs = inputs.spicetify-nix.legacyPackages.${system};
+  in {
+    enable = true;
+    enabledExtensions = with spicePkgs.extensions; [
+      popupLyrics
+      shuffle
+      powerBar
+      fullAlbumDate
+      writeify
+      autoVolume
+      copyToClipboard
+      adblock
+      beautifulLyrics
+    ];
+    enabledCustomApps = with spicePkgs.apps; [
+      marketplace
+      ncsVisualizer
+    ];
   };
 }
