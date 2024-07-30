@@ -20,6 +20,8 @@
       inherit system;
       config.allowUnfree = true;
     };
+
+    formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt;
   in {
     nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
       specialArgs = {
