@@ -11,7 +11,6 @@ in {
     (../hosts + ("/" + systemSettings.host) + "/home")
     ./ags
     ./hyprland
-    #./neovim
     ./gaming.nix
     ./kitty.nix
     ./lf.nix
