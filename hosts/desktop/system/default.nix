@@ -12,6 +12,9 @@
     ];
   };
 
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+
   boot.initrd.kernelModules = ["amdgpu"];
 
   services.xserver.videoDrivers = ["amdgpu"];
