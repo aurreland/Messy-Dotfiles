@@ -27,11 +27,9 @@ stdenv.mkDerivation rec {
   pname = "material-maker";
   version = "1.3";
 
-  src = fetchFromGitHub {
-    owner = "RodZill4";
-    repo = "material-maker";
-    rev = version;
-    sha256 = "sha256-vyagu7xL4ITt+xyoYyCcF8qq6L9sR6Ltdl6NwfrbZdA=";
+  src = fetchurl {
+    url = "https://github.com/RodZill4/material-maker/releases/download/1.3/material_maker_1_3_linux.tar.gz";
+    hash = "sha256-Y8+ZwXy3zqnsxqqaZeVgFSxLzmUkq+rBzbq8tEDc8/g=";
   };
 
   nativeBuildInputs = [
@@ -55,6 +53,11 @@ stdenv.mkDerivation rec {
     udev
   ];
 
+  unpackPhase = ''
+    mkdir -p src
+    tar -xzvf $src -C src
+  '';
+
   buildPhase = ''
     runHook preBuild
 
@@ -67,34 +70,28 @@ stdenv.mkDerivation rec {
     mkdir -p $HOME/.local/share/godot
     ln -s ${godot3-export-templates}/share/godot/templates $HOME/.local/share/godot
 
-    mkdir -p build
-    godot3-headless -v --export "Linux/X11" ./build/material-maker
-
     runHook postBuild
   '';
 
   installPhase = ''
     runHook preInstall
 
-    install -D -m 755 -t $out/libexec ./build/material-maker
-    install -D -m 644 -t $out/libexec ./build/material-maker.pck
+    install -D -m 755 -t $out/libexec ./src/material_maker_1_3_linux/material_maker
+    install -D -m 644 -t $out/libexec ./src/material_maker_1_3_linux/material_maker.pck
 
-    ls $src/material_maker
-    pwd $src/material_maker
-
-    cp -r $src/material_maker/doc $out/libexec
+    cp -r ./src/material_maker_1_3_linux/doc $out/libexec
     chmod -R 755 $out/libexec/doc
-    cp -r $src/material_maker/environments $out/libexec
+    cp -r ./src/material_maker_1_3_linux/environments $out/libexec
     chmod -R 755 $out/libexec/environments
-    cp -r $src/material_maker/examples $out/libexec
+    cp -r ./src/material_maker_1_3_linux/examples $out/libexec
     chmod -R 755 $out/libexec/examples
-    cp -r $src/material_maker/misc/export $out/libexec
+    cp -r ./src/material_maker_1_3_linux/export $out/libexec
     chmod -R 755 $out/libexec/export
-    cp -r $src/material_maker/library $out/libexec
+    cp -r ./src/material_maker_1_3_linux/library $out/libexec
     chmod -R 755 $out/libexec/library
-    cp -r $src/material_maker/meshes $out/libexec
+    cp -r ./src/material_maker_1_3_linux/meshes $out/libexec
     chmod -R 755 $out/libexec/meshes
-    cp -r $src/material_maker/nodes $out/libexec
+    cp -r ./src/material_maker_1_3_linux/nodes $out/libexec
     chmod -R 755 $out/libexec/nodes
 
     install -d -m 755 $out/bin
