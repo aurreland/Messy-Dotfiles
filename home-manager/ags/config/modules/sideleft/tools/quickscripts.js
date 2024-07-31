@@ -13,20 +13,20 @@ import { distroID, isArchDistro, isDebianDistro, hasFlatpak } from '../../.miscu
 const scripts = [
     {
         icon: 'nixos-symbolic',
-        name: 'Trim system generations to 5',
-        command: `sudo ${App.configDir}/scripts/quickscripts/nixos-trim-generations.sh 5 0 system`,
-        enabled: distroID == 'nixos',
-    },
-    {
-        icon: 'nixos-symbolic',
-        name: 'Trim home manager generations to 5',
-        command: `${App.configDir}/scripts/quickscripts/nixos-trim-generations.sh 5 0 home-manager`,
-        enabled: distroID == 'nixos',
-    },
-    {
-        icon: 'nixos-symbolic',
         name: 'Rebuild System Configuration',
-        command: `${App.configDir}/scripts/quickscripts/nixos-rebuild.sh system`,
+        command: `sudo hera -s system`,
+        enabled: distroID == 'nixos',
+    },
+    {
+        icon: 'nixos-symbolic',
+        name: 'Rebuild User Configuration',
+        command: `hera -s user`,
+        enabled: distroID == 'nixos',
+    },
+    {
+        icon: 'nixos-symbolic',
+        name: 'Upgrade Configuration',
+        command: `sudo hera -U`,
         enabled: distroID == 'nixos',
     },
     {

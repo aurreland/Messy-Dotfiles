@@ -47,7 +47,6 @@ in {
     (pkgs.writeShellScriptBin "hera" ''
       sync-user() {
           ${pkgs.home-manager}/bin/home-manager switch --flake ${userSettings.dotfilesDir}/#user;
-          sync-posthook
       }
 
       sync-system() {
