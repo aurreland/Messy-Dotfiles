@@ -15,7 +15,7 @@
     };
     userSettings = {
       username = "aurel";
-      dotfilesDir = "~/.dotfiles";
+      dotfilesDir = "~/dotfiles";
     };
 
     lib = nixpkgs.lib;
