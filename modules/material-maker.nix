@@ -1,21 +1,27 @@
 {
   lib,
   stdenv,
-  alsa-lib,
-  autoPatchelfHook,
   fetchFromGitHub,
-  godot3-headless,
+  fetchurl,
+  autoPatchelfHook,
+  copyDesktopItems,
+  makeDesktopItem,
   godot3-export-templates,
+  godot3-headless,
+  alsa-lib,
+  libGL,
   libGLU,
   libpulseaudio,
   libX11,
   libXcursor,
+  libXext,
+  libXfixes,
   libXi,
   libXinerama,
   libXrandr,
   libXrender,
-  nix-update-script,
-  udev,
+  zlib,
+  udev, # for libudev
 }:
 stdenv.mkDerivation rec {
   pname = "material-maker";
@@ -34,13 +40,19 @@ stdenv.mkDerivation rec {
   ];
 
   buildInputs = [
+    alsa-lib
+    libGL
     libGLU
     libX11
     libXcursor
+    libXext
+    libXfixes
     libXi
     libXinerama
     libXrandr
     libXrender
+    zlib
+    udev
   ];
 
   buildPhase = ''
@@ -57,8 +69,6 @@ stdenv.mkDerivation rec {
 
     mkdir -p build
     godot3-headless -v --export "Linux/X11" ./build/material-maker
-    godot3-headless -v --export "Linux/X11" ./build/material-maker.pck
-
 
     runHook postBuild
   '';
@@ -68,6 +78,25 @@ stdenv.mkDerivation rec {
 
     install -D -m 755 -t $out/libexec ./build/material-maker
     install -D -m 644 -t $out/libexec ./build/material-maker.pck
+
+    ls $src/material_maker
+    pwd $src/material_maker
+
+    cp -r $src/material_maker/doc $out/libexec
+    chmod -R 755 $out/libexec/doc
+    cp -r $src/material_maker/environments $out/libexec
+    chmod -R 755 $out/libexec/environments
+    cp -r $src/material_maker/examples $out/libexec
+    chmod -R 755 $out/libexec/examples
+    cp -r $src/material_maker/misc/export $out/libexec
+    chmod -R 755 $out/libexec/export
+    cp -r $src/material_maker/library $out/libexec
+    chmod -R 755 $out/libexec/library
+    cp -r $src/material_maker/meshes $out/libexec
+    chmod -R 755 $out/libexec/meshes
+    cp -r $src/material_maker/nodes $out/libexec
+    chmod -R 755 $out/libexec/nodes
+
     install -d -m 755 $out/bin
     ln -s $out/libexec/material-maker $out/bin/material-maker
 
@@ -81,8 +110,8 @@ stdenv.mkDerivation rec {
   ];
 
   meta = with lib; {
-    homepage = "https://ohmygit.org/";
-    description = "An interactive Git learning game";
+    homepage = "https://www.materialmaker.org/";
+    description = "";
     license = with licenses; [blueOak100];
     platforms = ["x86_64-linux"];
     maintainers = with maintainers; [jojosch];
