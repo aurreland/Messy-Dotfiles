@@ -17,7 +17,7 @@ export default () =>
       Button({
         className: "sidebar-module-btn-arrow",
         onClicked: () =>
-          execAsync(["xdg-open", "https://github.com/aurreland/nixos"]).catch(
+          execAsync(["xdg-open", "https://github.com/aurreland/Messy-Dotfiles"]).catch(
             print
           ),
         child: Icon({
