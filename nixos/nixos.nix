@@ -1,10 +1,10 @@
 {
-  host,
+  systemSettings,
   userSettings,
   ...
 }: {
   imports = [
-    (../hosts + ("/" + host) + "/system")
+    (../hosts + ("/" + systemSettings.host) + "/system")
     ./audio.nix
     ./hyprland.nix
     ./kanata.nix

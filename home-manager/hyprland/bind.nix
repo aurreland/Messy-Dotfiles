@@ -223,7 +223,6 @@ in {
     bind = Super, W, exec, ${pkgs.google-chrome}/bin/google-chrome-stable # Launch Google Chrome (browser)
     bind = Super, I, exec, XDG_CURRENT_DESKTOP="gnome" ${pkgs.gnome.gnome-control-center}/bin/gnome-control-center # Launch GNOME Settings
     bind = Ctrl+Super, V, exec, ${pkgs.pavucontrol}/bin/pavucontrol # Launch pavucontrol (volume mixer)
-    bind = Ctrl+Super+Shift, V, exec, ${pkgs.easyeffects}/bin/easyeffects # Launch EasyEffects (equalizer & other audio effects)
     bind = Ctrl+Shift, Escape, exec, ${pkgs.mission-center}/bin/mission-center # Launch System monitor
     bind = Ctrl+Super, exclam, exec, pkill ${pkgs.anyrun}/bin/anyrun || ${pkgs.anyrun}/bin/anyrun # Toggle fallback launcher: anyrun
 

@@ -2,16 +2,56 @@
   pkgs,
   userSettings,
   ...
-}: {
+}: let
+  helpMessage =
+    ''
+      --s|--sync:
+        - Usage: -s | --sync [user|system|null]
+        - Description: Sync configurations for either the user or system or both if no args provided.
+
+      --r|--refresh:
+        - Usage: -r | --refresh
+        - Description: Refresh the system by running post-sync tasks.
+
+      --u|--update:
+        - Usage: -u | --update
+        - Description: Update the system configurations.
+
+      --U|--upgrade:
+        - Usage: -U | --upgrade
+        - Description: Upgrade the system by updating and syncing user/system configurations.
+
+      --p|--pull:
+        - Usage: -p | --pull
+        - Description: Pull changes from the remote repository, updating local configurations.
+
+      --h|--harden:
+        - Usage: -h | --harden
+        - Description: Set strict permissions on configuration files.
+
+      --S|--soften:
+        - Usage: -S | --soften
+        - Description: Set relaxed permissions on configuration files.
+
+      --g|--garbage:
+        - Usage: -g | --garbage [full|<time>]
+        - Description: Clear system garbage files based on options provided.
+
+      --h|--help:
+        - Usage: -h | --help
+        - Description: Display help menu with available options.
+    ''
+    + "\n";
+in {
   home.packages = [
     (pkgs.writeShellScriptBin "hera" ''
       sync-user() {
-          ${pkgs.home-manager}/bin/home-manager switch --flake ${userSettings.dotfiles} #user;
+          ${pkgs.home-manager}/bin/home-manager switch --flake ${userSettings.dotfilesDir}/#user;
           sync-posthook
       }
 
       sync-system() {
-          sudo nixos-rebuild switch --flake ${userSettings.dotfiles} #system;
+          sudo nixos-rebuild switch --flake ${userSettings.dotfilesDir}/#system;
       }
 
       sync-posthook() {
@@ -23,7 +63,7 @@
       }
 
       update() {
-          sudo nix flake update ${userSettings.dotfiles}
+          sudo nix flake update ${userSettings.dotfilesDir}/
       }
 
       upgrade() {
@@ -34,7 +74,7 @@
 
       pull() {
           soften
-          pushd ${userSettings.dotfiles} &>/dev/null
+          pushd ${userSettings.dotfilesDir} &>/dev/null
           ${pkgs.git}/bin/git stash
           ${pkgs.git}/bin/git pull
           ${pkgs.git}/bin/git stash apply
@@ -43,20 +83,24 @@
       }
 
       harden() {
-          pushd ${userSettings.dotfiles} &>/dev/null
-          sudo chown 0:0 .
-          sudo chown -R 0:0 hosts
-          sudo chown -R 0:0 nixos
-          sudo chown -R 1000:users home-manager
-          sudo chown -R 1000:users hosts/desktop/home
-          sudo chown 1000:users **/README.md
+          pushd ${userSettings.dotfilesDir} &>/dev/null
+          sudo chown 0:0 ${userSettings.dotfilesDir}
+          sudo chown -R 0:0 ${userSettings.dotfilesDir}/hosts
+          sudo chown -R 0:0 ${userSettings.dotfilesDir}/nixos
+          sudo chown -R 1000:users ${userSettings.dotfilesDir}/home-manager
+          sudo chown -R 1000:users ${userSettings.dotfilesDir}/hosts/desktop/home
+          sudo chown 1000:users ${userSettings.dotfilesDir}/**/README.md
           popd &>/dev/null
       }
 
       soften() {
-          pushd ${userSettings.dotfiles} &>/dev/null
-          sudo chown -R 1000:users .
+          pushd ${userSettings.dotfilesDir} &>/dev/null
+          sudo chown -R 1000:users ${userSettings.dotfilesDir}
           popd &>/dev/null
+      }
+
+      help() {
+          echo "${helpMessage}"
       }
 
       while [[ $# -gt 0 ]]; do
@@ -88,7 +132,7 @@
               pull
               shift 1
               ;;
-          -h | --harden)
+          -H | --harden)
               harden
               shift 1
               ;;
