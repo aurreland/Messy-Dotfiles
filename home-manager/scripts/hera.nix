@@ -11,7 +11,7 @@
 
       --r|--refresh:
         - Usage: -r | --refresh
-        - Description: Refresh the system by running post-sync tasks.
+        - Description: Refresh/Reload the system
 
       --u|--update:
         - Usage: -u | --update
@@ -34,7 +34,7 @@
         - Description: Set relaxed permissions on configuration files.
 
       --g|--garbage:
-        - Usage: -g | --garbage [full|<time>]
+        - Usage: -g | --garbage [full|<time>|null(30d)]
         - Description: Clear system garbage files based on options provided.
 
       --h|--help:
@@ -102,6 +102,11 @@ in {
       help() {
           echo "${helpMessage}"
       }
+
+      if [ $# -eq 0 ]; then
+          help
+          exit 0
+      fi
 
       while [[ $# -gt 0 ]]; do
           case "$1" in
