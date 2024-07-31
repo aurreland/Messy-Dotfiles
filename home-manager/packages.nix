@@ -38,7 +38,6 @@
       apostrophe # Markdown Editor
       blanket # Ambient Sounds
       github-desktop # Github
-      godot_4 # Game Editor
 
       # rust
       cargo
@@ -58,4 +57,8 @@
       gnome-secrets # Keepass Manager
       # gaphor # Simple modelling tool
     ]);
+
+  programs.fastfetch = {
+    enable = true;
+  };
 }
