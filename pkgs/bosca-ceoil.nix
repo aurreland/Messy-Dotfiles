@@ -1,20 +1,26 @@
 {
   lib,
   stdenv,
-  alsa-lib,
-  autoPatchelfHook,
+  fetchFromGitHub,
   fetchurl,
-  godot3-headless,
+  autoPatchelfHook,
+  copyDesktopItems,
+  makeDesktopItem,
   godot3-export-templates,
+  godot3-headless,
+  alsa-lib,
+  libGL,
   libGLU,
   libpulseaudio,
   libX11,
   libXcursor,
+  libXext,
+  libXfixes,
   libXi,
   libXinerama,
   libXrandr,
   libXrender,
-  nix-update-script,
+  zlib,
   udev,
   unzip,
 }:
@@ -27,21 +33,50 @@ stdenv.mkDerivation rec {
     hash = "sha256-Zkqn6TxiwUehDnyih8Vogq8VeDq28/3xTeXJhCAQQ7I=";
   };
 
+  icon = fetchurl {
+    url = "https://github.com/YuriSizov/boscaceoil-blue/raw/${version}/icon.png";
+    hash = "sha256-q50UJOhT298zjywV22uKE+6rlQkH6D0q49vdFzDc2Sg=";
+  };
+
   nativeBuildInputs = [
     autoPatchelfHook
+    copyDesktopItems
     godot3-headless
     unzip
   ];
 
   buildInputs = [
+    alsa-lib
+    libGL
     libGLU
     libX11
     libXcursor
+    libXext
+    libXfixes
     libXi
     libXinerama
     libXrandr
     libXrender
+    zlib
+    udev
   ];
+
+  desktopItems = [
+    (makeDesktopItem {
+      name = "boscaceoil-blue";
+      exec = "boscaceoil-blue";
+      icon = "boscaceoil-blue";
+      desktopName = "Bosca Ceoil : The Blue Album";
+      comment = meta.description;
+      categories = ["Music"];
+      keywords = ["bosca" "ceoil" "music"];
+    })
+  ];
+
+  unpackPhase = ''
+    mkdir -p src
+    unzip $src -d src/
+  '';
 
   buildPhase = ''
     runHook preBuild
@@ -55,19 +90,16 @@ stdenv.mkDerivation rec {
     mkdir -p $HOME/.local/share/godot
     ln -s ${godot3-export-templates}/share/godot/templates $HOME/.local/share/godot
 
-    mkdir -p build
-    unzip $src -d build
-    ls build
-
     runHook postBuild
   '';
 
   installPhase = ''
     runHook preInstall
 
-    install -D -m 755 -t $out/libexec ./build/boscaceoil-blue-linux-x86_64
-    install -d -m 755 $out/bin
-    ln -s $out/libexec/boscaceoil-blue-linux-x86_64 $out/bin/boscaceoil-blue
+    mkdir -p $out/share/icons/hicolor/256x256/apps/
+    install -D -m 644 $icon -t $out/share/icons/hicolor/256x256/apps/
+
+    install -D -m 755 ./src/boscaceoil-blue-linux-x86_64/boscaceoil-blue.x86_64 $out/bin/boscaceoil-blue
 
     runHook postInstall
   '';
@@ -79,10 +111,11 @@ stdenv.mkDerivation rec {
   ];
 
   meta = with lib; {
-    homepage = "https://ohmygit.org/";
-    description = "An interactive Git learning game";
-    license = with licenses; [blueOak100];
+    homepage = "https://github.com/YuriSizov/boscaceoil-blue";
+    description = "Simple and beginner-friendly app for making music.";
+    license = licenses.mit;
     platforms = ["x86_64-linux"];
-    maintainers = with maintainers; [jojosch];
+    maintainers = with maintainers; [aurreland];
+    mainProgram = "boscaceoil-blue";
   };
 }
