@@ -38,6 +38,7 @@
       apostrophe # Markdown Editor
       blanket # Ambient Sounds
       github-desktop # Github
+      keepassxc
 
       # rust
       cargo
