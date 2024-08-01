@@ -71,6 +71,11 @@ stdenv.mkDerivation rec {
     })
   ];
 
+  unpackPhase = ''
+    mkdir -p src
+    tar -xzvf $src -C src
+  '';
+
   buildPhase = ''
     runHook preBuild
 
@@ -88,9 +93,6 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     runHook preInstall
-
-    mkdir -p src
-    tar -xzvf $src -C src
 
     install -D -m 755 ./src/material_maker_1_3_linux/material_maker.x86_64 $out/libexec/material-maker
     install -D -m 644 ./src/material_maker_1_3_linux/material_maker.pck $out/libexec/material-maker.pck
