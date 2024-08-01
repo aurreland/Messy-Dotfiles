@@ -131,5 +131,6 @@ stdenv.mkDerivation rec {
     license = licenses.mit;
     platforms = ["x86_64-linux"];
     maintainers = with maintainers; [aurreland];
+    mainProgram = "material-maker";
   };
 }
