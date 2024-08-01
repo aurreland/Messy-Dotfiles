@@ -3,7 +3,7 @@
   stdenv,
   alsa-lib,
   autoPatchelfHook,
-  fetchFromGitHub,
+  fetchurl,
   godot3-headless,
   godot3-export-templates,
   libGLU,
@@ -16,21 +16,21 @@
   libXrender,
   nix-update-script,
   udev,
+  unzip,
 }:
 stdenv.mkDerivation rec {
   pname = "boscaceoil-blue";
   version = "3.0-stable";
 
-  src = fetchFromGitHub {
-    owner = "YuriSizov";
-    repo = "boscaceoil-blue";
-    rev = version;
-    sha256 = "sha256-4WabZAWahJwTd2wCTeWvKq/EiNjjMd+X2uCcXXLibJw=";
+  src = fetchurl {
+    url = "https://github.com/YuriSizov/boscaceoil-blue/releases/download/${version}/boscaceoil-blue-linux-x86_64.zip";
+    hash = "sha256-Zkqn6TxiwUehDnyih8Vogq8VeDq28/3xTeXJhCAQQ7I=";
   };
 
   nativeBuildInputs = [
     autoPatchelfHook
     godot3-headless
+    unzip
   ];
 
   buildInputs = [
@@ -56,7 +56,8 @@ stdenv.mkDerivation rec {
     ln -s ${godot3-export-templates}/share/godot/templates $HOME/.local/share/godot
 
     mkdir -p build
-    godot3-headless -v --export "Linux/X11" ./build/boscaceoil-blue
+    unzip $src -d build
+    ls build
 
     runHook postBuild
   '';
@@ -64,9 +65,9 @@ stdenv.mkDerivation rec {
   installPhase = ''
     runHook preInstall
 
-    install -D -m 755 -t $out/libexec ./build/boscaceoil-blue
+    install -D -m 755 -t $out/libexec ./build/boscaceoil-blue-linux-x86_64
     install -d -m 755 $out/bin
-    ln -s $out/libexec/boscaceoil-blue $out/bin/boscaceoil-blue
+    ln -s $out/libexec/boscaceoil-blue-linux-x86_64 $out/bin/boscaceoil-blue
 
     runHook postInstall
   '';
