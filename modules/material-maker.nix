@@ -73,9 +73,10 @@ stdenv.mkDerivation rec {
 
     mkdir -p src
     tar -xzvf $src -C src
+    ls ./src/material_maker_1_3_linux/
 
-    install -D -m 755 -t $out/libexec ./src/material_maker_1_3_linux/material_maker
-    install -D -m 644 -t $out/libexec ./src/material_maker_1_3_linux/material_maker.pck
+    install -D -m 755 ./src/material_maker_1_3_linux/material_maker.x86_64 $out/libexec/material-maker
+    install -D -m 644 ./src/material_maker_1_3_linux/material_maker.pck $out/libexec/material-maker.pck
 
     cp -r ./src/material_maker_1_3_linux/doc $out/libexec
     chmod -R 755 $out/libexec/doc
