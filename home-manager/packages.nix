@@ -40,6 +40,8 @@
       github-desktop # Github
       keepassxc
 
+      p7zip
+
       # rust
       cargo
       cargo-generate
@@ -55,8 +57,6 @@
       jq
     ])
     ++ (with pkgs-stable; [
-      gnome-secrets # Keepass Manager
-      # gaphor # Simple modelling tool
     ]);
 
   programs.fastfetch = {
